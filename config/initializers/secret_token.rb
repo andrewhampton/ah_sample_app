@@ -18,11 +18,13 @@ def secure_token
     File.read(token_file).chomp
   else
     #Generate a new token and store it in the token file
-    token = securerandom.hex(64)
+    token = SecureRandom.hex(64)
     File.write(token_file, token)
     token
   end
 end
+
+SampleApp::Application.config.secret_key_base = secure_token
 
 
 # Original
